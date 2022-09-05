@@ -100,4 +100,18 @@ public class MainController {
                 .collect(Collectors.joining("<br>\n"));
     }
 
+
+    @GetMapping("/mbti/{name}")
+    @ResponseBody
+    public String shoMbti(@PathVariable String name) {
+        return switch (name) {
+            case "홍길동" -> "INFP";
+            case "홍길순" -> "INFJ";
+            case "임꺽정" -> "ENFP";
+            case "장희성" -> "INFP";
+            default -> "모름";
+        };
+    }
+
+
 }
