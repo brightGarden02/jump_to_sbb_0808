@@ -103,12 +103,14 @@ public class MainController {
 
     @GetMapping("/mbti/{name}")
     @ResponseBody
-    public String shoMbti(@PathVariable String name) {
+    public String showMbti(@PathVariable String name) {
         return switch (name) {
-            case "홍길동" -> "INFP";
-            case "홍길순" -> "INFJ";
+            case "홍길순" -> {
+                char j = 'J';
+                yield "INF" + j; // yield: switch문 안에서의 return
+            }
             case "임꺽정" -> "ENFP";
-            case "장희성" -> "INFP";
+            case "장희성", "홍길동" -> "INFP";
             default -> "모름";
         };
     }
