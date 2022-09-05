@@ -193,6 +193,24 @@ public class MainController {
     }
 
 
+    @GetMapping("/deleteArticle/{id}")
+    @ResponseBody
+    public String deleteArticle(@PathVariable int id) {
+        Article article = articles
+                .stream()
+                .filter(a -> a.getId() == id) // 1번
+                .findFirst()
+                .orElse(null);
+
+        if(article == null) {
+            return "%번 게시물은 존재하지 않습니다.".formatted(id);
+        }
+
+        articles.remove(article);
+
+        return "%번 게시물을 삭제하였습니다.".formatted(article.getId());
+    }
+
 }
 
 
