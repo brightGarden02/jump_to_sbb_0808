@@ -57,4 +57,14 @@ class SbbApplicationTests {
 	}
 
 
+	@Test
+	void testJpa3() {
+
+		// select * from question
+		Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
+		assertEquals(1, q.getId());
+	}
+
+
+
 }
