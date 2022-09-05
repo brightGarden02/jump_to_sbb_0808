@@ -40,7 +40,9 @@ class SbbApplicationTests {
 		q2.setCreateDate(LocalDateTime.now());
 		questionRepository.save(q2); // 두번째 질문 저장
 
+		questionRepository.disableForeignKeyChecks();
 		questionRepository.truncate();
+		questionRepository.enableForeignKeyChecks();
 
 	}
 
