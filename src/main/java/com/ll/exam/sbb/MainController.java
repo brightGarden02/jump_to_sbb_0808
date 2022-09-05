@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -211,6 +212,22 @@ public class MainController {
         return "%번 게시물을 삭제하였습니다.".formatted(article.getId());
     }
 
+
+    @GetMapping("addPersonOldWay")
+    @ResponseBody
+    Person addPersonOldWay(int id, int age, String name) {
+
+        Person p = new Person(id, age, name);
+        return p;
+    }
+
+    @GetMapping("addPerson")
+    @ResponseBody
+    Person addPerson(Person p) {
+        return p;
+    }
+
+
 }
 
 
@@ -228,4 +245,13 @@ class Article {
     public Article(String title, String body) {
         this(++lastId, title, body);
     }
+}
+
+
+@AllArgsConstructor
+@Getter
+class Person {
+    private int id;
+    private int age;
+    private String name;
 }
