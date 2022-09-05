@@ -1,5 +1,6 @@
 package com.ll.exam.sbb;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -137,4 +138,21 @@ public class MainController {
     }
 
 
+    @GetMapping("/addArticle")
+    @ResponseBody
+    public String addArticle(String title, String body) {
+        int id = 1;
+        Article article = new Article(id, title, body);
+
+        return "%d번 게시물이 생성되었습니다.".formatted(id);
+    }
+
+}
+
+
+@AllArgsConstructor
+class Article {
+    private final int id;
+    private final String title;
+    private final String body;
 }
