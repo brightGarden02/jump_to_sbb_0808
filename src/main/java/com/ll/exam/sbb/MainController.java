@@ -2,6 +2,7 @@ package com.ll.exam.sbb;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -250,8 +251,15 @@ class Article {
 
 @AllArgsConstructor
 @Getter
+@Setter
+@NoArgsConstructor
 class Person {
     private int id;
     private int age;
     private String name;
+
+    public Person(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
 }
