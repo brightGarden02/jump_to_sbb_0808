@@ -25,7 +25,7 @@ class SbbApplicationTests {
 
 
 	@Test
-	void testJpa() {
+	void testJpa0() {
 
 		Question q1 = new Question();
 		q1.setSubject("sbb가 무엇인가요?");
@@ -40,8 +40,7 @@ class SbbApplicationTests {
 		q2.setCreateDate(LocalDateTime.now());
 		questionRepository.save(q2); // 두번째 질문 저장
 
-		assertThat(q1.getId()).isGreaterThan(0);
-		assertThat(q2.getId()).isGreaterThan(q1.getId());
+		questionRepository.truncate();
 
 	}
 
@@ -70,7 +69,7 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa4() {
-		Question q = this.questionRepository.findBySubjectAndContent(
+		Question q = questionRepository.findBySubjectAndContent(
 				"sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다");
 		assertEquals(1, q.getId());
 	}
@@ -78,7 +77,7 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa5() {
-		List<Question> qList = this.questionRepository.findBySubjectLike("sbb%");
+		List<Question> qList = questionRepository.findBySubjectLike("sbb%");
 		Question q = qList.get(0);
 		assertEquals("sbb가 무엇인가요?", q.getSubject());
 	}
@@ -86,7 +85,7 @@ class SbbApplicationTests {
 	@Test
 	void testJpa6() {
 
-		Optional<Question> oq = this.questionRepository.findById(1);
+		Optional<Question> oq = questionRepository.findById(1);
 		assertTrue(oq.isPresent());
 		Question q = oq.get();
 		q.setSubject("수정된 제목");
@@ -96,14 +95,14 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa7() {
-		assertEquals(2, this.questionRepository.count());
-		Optional<Question> oq = this.questionRepository.findById(1);
+		assertEquals(2, questionRepository.count());
+		Optional<Question> oq = questionRepository.findById(1);
 		assertTrue(oq.isPresent());
 		Question q = oq.get();
 
-		this.questionRepository.delete(q);
+		questionRepository.delete(q);
 
-		assertEquals(1, this.questionRepository.count());
+		assertEquals(1, questionRepository.count());
 	}
 
 
