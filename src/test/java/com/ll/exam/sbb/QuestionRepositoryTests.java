@@ -7,12 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class QuestionRepositoryTest {
+class QuestionRepositoryTests {
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -24,7 +23,7 @@ class QuestionRepositoryTest {
         createSampleData();
     }
 
-    private void createSampleData() {
+    private static void createSampleData(QuestionRepository questionRepository) {
         Question q1 = new Question();
         q1.setSubject("sbb가 무엇인가요?");
         q1.setContent("sbb에 대해서 알고 싶습니다.");
@@ -37,10 +36,15 @@ class QuestionRepositoryTest {
         q2.setCreateDate(LocalDateTime.now());
         questionRepository.save(q2);
 
-        lastSampleDataId = q2.getId();
+        return q2.getId();
     }
 
-    private void clearData() {
+    private void createSampleData() {
+        lastSampleDataId = createSampleData(questionRepository);
+    }
+
+
+    private void clearData(QuestionRepository questionRepository) {
         questionRepository.disableForeignKeyChecks();
         questionRepository.truncate();
         questionRepository.enableForeignKeyChecks();
