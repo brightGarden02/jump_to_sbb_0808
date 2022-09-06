@@ -1,5 +1,9 @@
 package com.ll.exam.sbb;
 
+import com.ll.exam.sbb.entity.Answer;
+import com.ll.exam.sbb.entity.Question;
+import com.ll.exam.sbb.repository.AnswerRepository;
+import com.ll.exam.sbb.repository.QuestionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +29,7 @@ class AnswerRepositoryTests {
 
     private void clearData() {
         QuestionRepositoryTests.clearData(questionRepository);
-        answerRepository.disableForeignKeyChecks();
-        answerRepository.truncate();
-        answerRepository.enableForeignKeyChecks();
+        answerRepository.truncateTable();
     }
 
     private void createSampleData() {
