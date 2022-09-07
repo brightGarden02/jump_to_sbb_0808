@@ -6,6 +6,7 @@ import com.ll.exam.sbb.answer.repository.AnswerRepository;
 import com.ll.exam.sbb.question.repository.QuestionRepository;
 import com.ll.exam.sbb.user.SiteUser;
 import com.ll.exam.sbb.user.repository.UserRepository;
+import com.ll.exam.sbb.user.service.UserService;
 import com.ll.exam.sbb.user.service.UserServiceTests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public
 class AnswerRepositoryTests {
 
+    @Autowired
+    private UserService userService;
     @Autowired
     private QuestionRepository questionRepository;
     @Autowired
@@ -49,7 +52,7 @@ class AnswerRepositoryTests {
 
 
     private void createSampleData() {
-        QuestionRepositoryTests.createSampleData(questionRepository);
+        QuestionRepositoryTests.createSampleData(userService, questionRepository);
 
         // 관련 답변이 하나없는 상태에서 쿼리 발생
         Question q = questionRepository.findById(1L).get();
