@@ -47,6 +47,7 @@ class QuestionRepositoryTests {
 
 
     private void clearData(QuestionRepository questionRepository) {
+        questionRepository.deleteAll(); //DELETE FROM question;
         questionRepository.truncateTable();
     }
 
