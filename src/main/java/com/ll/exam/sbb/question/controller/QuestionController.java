@@ -5,8 +5,10 @@ import com.ll.exam.sbb.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -48,32 +50,19 @@ public class QuestionController {
     }
 
     @GetMapping("/create")
-    public String questionCreate() {
+    public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 
 
     @PostMapping("/create")
-    public String questionCreate(Model model, QuestionForm questionform) {
+    public String questionCreate(Model model, @Valid QuestionForm questionForm, BindingResult bindingResult) {
 
-        boolean hasError = false;
-
-        if(questionform.getSubject() == null || questionform.getSubject().trim().length() == 0) {
-            model.addAttribute("subjectErrorMsg", "제목 좀...");
-            hasError = true;
-        }
-        if (questionform.getContent() == null || questionform.getContent().trim().length() == 0) {
-            model.addAttribute("contentErrorMsg", "내용 좀...");
-            hasError = true;
-        }
-
-        if (hasError) {
-            model.addAttribute("questionForm", questionform);
+        if(bindingResult.hasErrors()) {
             return "question_form";
         }
 
-
-        questionService.create(questionform.getSubject(), questionform.getContent());
+        questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
     }
 
