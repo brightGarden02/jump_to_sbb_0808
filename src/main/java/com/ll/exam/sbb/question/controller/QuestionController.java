@@ -45,6 +45,7 @@ public class QuestionController {
         //questionList라는 이름으로 questionList 변수를 사용할 수 있다
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
+        model.addAttribute("sortCode", sortCode);
 
         return "question_list";
     }
