@@ -25,6 +25,7 @@ public class Question {
     private String content;
 
     private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answerList = new ArrayList<>();
