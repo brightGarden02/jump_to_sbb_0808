@@ -17,6 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
+public
 class AnswerRepositoryTests {
 
     @Autowired
@@ -32,12 +33,17 @@ class AnswerRepositoryTests {
     }
 
 
-    private void clearData() {
+    public static void clearData(AnswerRepository answerRepository, QuestionRepository questionRepository) {
         QuestionRepositoryTests.clearData(questionRepository);
 
         answerRepository.deleteAll(); //DELETE FROM question;
         answerRepository.truncateTable();
     }
+
+    private void clearData() {
+        clearData(answerRepository, questionRepository);
+    }
+
 
     private void createSampleData() {
         QuestionRepositoryTests.createSampleData(questionRepository);
