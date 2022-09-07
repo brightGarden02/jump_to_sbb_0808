@@ -3,6 +3,7 @@ package com.ll.exam.sbb.question.service;
 import com.ll.exam.sbb.DataNotFoundException;
 import com.ll.exam.sbb.question.entity.Question;
 import com.ll.exam.sbb.question.repository.QuestionRepository;
+import com.ll.exam.sbb.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,11 +39,12 @@ public class QuestionService {
                 .orElseThrow(() -> new DataNotFoundException("no %d question not found,".formatted(id)));
     }
 
-    public void create(String subject, String content) {
+    public void create(String subject, String content, SiteUser author) {
 
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
+        q.setAuthor(author);
         q.setCreateDate(LocalDateTime.now());
         questionRepository.save(q);
 
