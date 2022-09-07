@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -140,6 +142,16 @@ class QuestionRepositoryTests {
         });
 
     }
+
+    @Test
+    void findAllPageable() {
+        // Pageable: 한페이지에 몀ㅊ개의 아이템이 나와야하는지 + 현재 몇 페이지인지
+        PageRequest pageable = PageRequest.of(0, lastSampleDataId);
+        Page<Question> page = questionRepository.findAll(pageable);
+
+        assertThat(page.getTotalPages()).isEqualTo(1);
+    }
+
 
 
 }
