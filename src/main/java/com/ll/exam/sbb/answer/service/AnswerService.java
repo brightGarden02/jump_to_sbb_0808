@@ -30,4 +30,10 @@ public class AnswerService {
         return answerRepository.findById(id).orElseThrow(() -> new DataNotFoundException("answer not found"));
 
     }
+
+    public void modify(Answer answer, String content) {
+        answer.setContent(content);
+        answer.setModifyDate(LocalDateTime.now());
+        answerRepository.save(answer);
+    }
 }
