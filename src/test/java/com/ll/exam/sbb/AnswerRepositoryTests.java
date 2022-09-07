@@ -70,4 +70,12 @@ class AnswerRepositoryTests {
         assertThat(a.getContent()).isEqualTo("sbb는 질문답변 게시판 입니다.");
     }
 
+    @Test
+    void 관련된_question_조회() {
+        Answer a = this.answerRepository.findById(1).get();
+        Question q = a.getQuestion();
+
+        assertThat(q.getId()).isEqualTo(1);
+    }
+
 }
