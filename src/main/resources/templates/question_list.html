@@ -12,7 +12,9 @@
         <div class="col-6">
             <form class="input-group">
                 <input class="form-control" type="text" name="kw" placeholder="검색어를 입력해주세요." th:value="${param.kw}">
-                <select onchange="$(this).closest('form').submit();" class="form-select" name="sortCode" th:value="${param.sortCode}">
+                <select onchange="$(this).closest('form').submit();" class="form-select" name="sortCode"
+                        th:value="${param.sortCode}">
+
                     <option value="NEW">최신순</option>
                     <option value="OLD">오래된순</option>
                 </select>
@@ -33,6 +35,9 @@
             <th>제목</th>
             <th>글쓴이</th>
             <th>작성일시</th>
+            <th>조회</th>
+            <th>추천</th>
+
         </tr>
         </thead>
         <tbody>
@@ -40,20 +45,34 @@
             <td th:text="${question.id}"></td>
             <td class="text-start">
                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
-                <span class="text-danger small ms-2" th:if="${#lists.size(question.answerList) > 0}"
-                      th:text="${#lists.size(question.answerList)}">
-                </span>
             </td>
             <td>
                 <span th:text="${question.author?.username}"></span>
             </td>
             <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>
+            <td>
+                <span class="text-danger small ms-2"
+                      th:text="${question.hitCount}">
+                </span>
+            </td>
+            <td>
+                <span class="text-danger small ms-2" th:if="${#lists.size(question.answerList) > 0}"
+                      th:text="${#lists.size(question.answerList)}">
+                </span>
+
+                <span class="text-danger small ms-2" th:if="${#lists.size(question.answerList) == 0}"
+                      th:text="0">
+                </span>
+            </td>
+
+
         </tr>
         </tbody>
     </table>
 
     <!-- 페이징처리 시작 -->
-    <div th:if="${!paging.isEmpty()}" th:with="queryStrBase = '?kw=' + ${param.kw}, queryStrBase = ${queryStrBase} + '&sortCode=' + ${param.sortCode}">
+    <div th:if="${!paging.isEmpty()}"
+         th:with="queryStrBase = '?kw=' + ${param.kw}, queryStrBase = ${queryStrBase} + '&sortCode=' + ${param.sortCode}">
 
     <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
