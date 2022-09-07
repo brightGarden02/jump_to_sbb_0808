@@ -14,6 +14,10 @@
   <!-- sbb CSS -->
   <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
   <title>Hello, sbb!</title>
+
+  <!-- 제이쿼리 불러오기 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body style="min-height:100vh;" class="d-flex flex-column">
 
@@ -38,6 +42,15 @@
 <!-- 자바스크립트 Start -->
 <th:block layout:fragment="script"></th:block>
 <!-- 자바스크립트 End -->
+
+<!-- HTML이 전부 로딩 된 후, 실행되어야 하는 녀석(자바스크립트 코드)들은 밑에 두는게 좋다. -->
+<script>
+  $("select[value]").each((index, node) => {
+    const $select = $(node);
+    const value = $select.attr("value");
+    $select.find(`option[value="${value}"]`).prop("selected", true);
+  });
+</script>
 
 </body>
 </html>
