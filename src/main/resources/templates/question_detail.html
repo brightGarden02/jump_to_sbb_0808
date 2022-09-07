@@ -23,7 +23,11 @@
           <div class="mb-2">
             <span th:text="${question.author?.username}"></span>
           </div>
-          <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+          <div class="mb-2" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+          <div>
+            HIT : [[${question.hitCount}]]
+          </div>
+
         </div>
       </div>
 
