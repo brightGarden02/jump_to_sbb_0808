@@ -25,7 +25,7 @@ public class QuestionController {
     // @Autowired //필드주입
     private final QuestionService questionService;
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
 //    @ResponseBody
     // 이 자리에 @ResponseBody가 없으면 resources/question_list/question_list.html 파일을 뷰로 삼는다.
     public String list(Model model) {
@@ -40,7 +40,7 @@ public class QuestionController {
     }
 
 
-    @RequestMapping("/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable int id) {
         Question question = questionService.getQuestion(id);
 
