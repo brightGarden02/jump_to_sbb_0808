@@ -2,6 +2,7 @@
 <div th:text="|날짜 ${#temporals.format(question.createDate, 'yy.MM.dd HH:mm')}|"></div>
 <div th:text="${question.content}"></div>
 
+<!-- select * from answer where question_id = ? -->
 <h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
 <div>
   <ul>
