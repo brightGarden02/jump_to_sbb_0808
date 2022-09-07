@@ -1,5 +1,6 @@
 package com.ll.exam.sbb.user.service;
 
+import com.ll.exam.sbb.DataNotFoundException;
 import com.ll.exam.sbb.SignupEmailDuplicatedException;
 import com.ll.exam.sbb.SignupUsernameDuplicatedException;
 import com.ll.exam.sbb.user.SiteUser;
@@ -38,4 +39,7 @@ public class UserService {
         return user;
     }
 
+    public SiteUser getUser(String username) {
+        return this.userRepository.findByUsername(username).orElseThrow(() -> new DataNotFoundException("siteuser not found"));
+    }
 }
