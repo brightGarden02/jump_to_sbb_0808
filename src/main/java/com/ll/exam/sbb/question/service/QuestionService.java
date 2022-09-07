@@ -34,7 +34,8 @@ public class QuestionService {
             return questionRepository.findAll(pageable);
         }
 
-        return questionRepository.findBySubjectContainsOrContentContains(kw, kw, pageable);
+        return questionRepository.findBySubjectContainsOrContentContainsOrAuthor_usernameContains(kw, kw, kw, pageable);
+
     }
 
     public Question getQuestion(Long id) {
