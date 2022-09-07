@@ -5,6 +5,8 @@ import com.ll.exam.sbb.question.entity.Question;
 import com.ll.exam.sbb.answer.repository.AnswerRepository;
 import com.ll.exam.sbb.question.repository.QuestionRepository;
 import com.ll.exam.sbb.user.SiteUser;
+import com.ll.exam.sbb.user.repository.UserRepository;
+import com.ll.exam.sbb.user.service.UserServiceTests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +29,22 @@ class AnswerRepositoryTests {
     private AnswerRepository answerRepository;
     private int lastSampleDataId;
 
+    @Autowired
+    private UserRepository userRepository;
+
+
     @BeforeEach
     void beforeEach() {
         clearData();
         createSampleData();
     }
 
-
-    public static void clearData(AnswerRepository answerRepository, QuestionRepository questionRepository) {
-        QuestionRepositoryTests.clearData(questionRepository);
-
-        answerRepository.deleteAll(); //DELETE FROM question;
-        answerRepository.truncateTable();
+    public static void clearData(UserRepository userRepository, AnswerRepository answerRepository, QuestionRepository questionRepository) {
+        UserServiceTests.clearData(userRepository, answerRepository, questionRepository);
     }
 
     private void clearData() {
-        clearData(answerRepository, questionRepository);
+        clearData(userRepository, answerRepository, questionRepository);
     }
 
 
