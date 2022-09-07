@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
 <h1 th:text="|제목 : ${question.subject}|"></h1>
 <div th:text="|날짜 ${#temporals.format(question.createDate, 'yy.MM.dd HH:mm')}|"></div>
 <div th:text="${question.content}"></div>
