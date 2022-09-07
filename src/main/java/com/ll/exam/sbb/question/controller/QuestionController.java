@@ -33,10 +33,5 @@ public class QuestionController {
         return "question_list";
     }
 
-    @RequestMapping("/question/list2")
-    @ResponseBody
-    public String list2() {
-        return "하하111777";
-    }
 
 }

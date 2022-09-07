@@ -1,10 +1,14 @@
-<table border="1">
+<table>
+    <thead>
     <tr>
-        <td>11333</td>
-        <td>11444</td>
+        <td>제목</td>
+        <td>작성일자</td>
     </tr>
-    <tr>
-        <td>22555</td>
-        <td>33333</td>
+    </thead>
+    <tbody>
+    <tr th:each="question : ${questionList}">
+        <td th:text="${question.subject}"></td>
+        <td th:text="${question.createDate}"></td>
     </tr>
+    </tbody>
 </table>
