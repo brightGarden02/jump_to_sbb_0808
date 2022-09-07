@@ -1,4 +1,4 @@
-package com.ll.exam.sbb.controller;
+package com.ll.exam.sbb;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.ll.exam.sbb.controller;
+package com.ll.exam.sbb.question.controller;
 
-import com.ll.exam.sbb.service.QuestionService;
+import com.ll.exam.sbb.question.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

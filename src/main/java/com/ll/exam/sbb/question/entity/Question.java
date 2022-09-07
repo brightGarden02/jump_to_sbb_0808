@@ -1,5 +1,6 @@
-package com.ll.exam.sbb.entity;
+package com.ll.exam.sbb.question.entity;
 
+import com.ll.exam.sbb.answer.entity.Answer;
 import lombok.Getter;
 import lombok.Setter;
 
