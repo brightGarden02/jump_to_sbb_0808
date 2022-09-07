@@ -20,7 +20,7 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
 
-    public Question getQuestion(int id) {
+    public Question getQuestion(int id) throws DataNotFoundException {
 
         Optional<Question> oq = questionRepository.findById(id);
 
