@@ -1,8 +1,14 @@
 <h1 th:text="|제목 : ${question.subject}|"></h1>
 <div th:text="|날짜 ${#temporals.format(question.createDate, 'yy.MM.dd HH:mm')}|"></div>
-
-
 <div th:text="${question.content}"></div>
+
+<h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+<div>
+  <ul>
+    <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
+  </ul>
+</div>
+
 
 <form method="POST" th:action="@{|/answer/create/${question.id}|}">
   <textarea name="content" rows="15" required></textarea>
