@@ -12,7 +12,7 @@
         <div class="col-6">
             <form class="input-group">
                 <input class="form-control" type="text" name="kw" placeholder="검색어를 입력해주세요." th:value="${param.kw}">
-                <select class="form-select" name="sortCode" th:value="${param.sortCode}">
+                <select onchange="$(this).closest('form').submit();" class="form-select" name="sortCode" th:value="${param.sortCode}">
                     <option value="NEW">최신순</option>
                     <option value="OLD">오래된순</option>
                 </select>
