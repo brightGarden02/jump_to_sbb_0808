@@ -1,10 +1,8 @@
 package com.ll.exam.sbb.question.controller;
 
 import com.ll.exam.sbb.question.entity.Question;
-import com.ll.exam.sbb.question.repository.QuestionRepository;
 import com.ll.exam.sbb.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +54,18 @@ public class QuestionController {
 
 
     @PostMapping("/create")
-    public String questionCreate(String subject, String content) {
-        questionService.create(subject, content);
+    public String questionCreate(Model model, QuestionForm questionform) {
+
+        if(questionform.getSubject() == null || questionform.getSubject().trim().length() == 0) {
+            model.addAttribute("errorMsg", "wpahr wha...");
+            return "question_form";
+        }
+        if (questionform.getContent() == null || questionform.getContent().trim().length() == 0) {
+            model.addAttribute("errorMsg", "내용 좀...");
+            return "question_form";
+        }
+
+        questionService.create(questionform.getSubject(), questionform.getContent());
         return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
     }
 
