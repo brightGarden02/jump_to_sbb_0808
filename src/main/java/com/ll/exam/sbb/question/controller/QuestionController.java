@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class QuestionController {
 
     @RequestMapping("/question/list")
-    @ResponseBody
+//    @ResponseBody
+    // 이 자리에 @ResponseBody가 없으면 resources/question_list/question_list.html 파일을 뷰로 삼는다.
     public String list() {
         return "question list";
     }
