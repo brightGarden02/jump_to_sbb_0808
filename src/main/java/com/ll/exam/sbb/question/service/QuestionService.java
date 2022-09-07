@@ -23,14 +23,18 @@ public class QuestionService {
 
     private QuestionRepository questionRepository;
 
-    public Page<Question> getList(int page) {
+    public Page<Question> getList(String kw, int page) {
 
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
 
         Pageable pageable = PageRequest.of(page,10, Sort.by(sorts));
 
-        return this.questionRepository.findAll(pageable);
+        if ( kw == null || kw.trim().length() == 0 ) {
+            return questionRepository.findAll(pageable);
+        }
+
+        return questionRepository.findBySubjectContains(kw, pageable);
     }
 
     public Question getQuestion(Long id) {
