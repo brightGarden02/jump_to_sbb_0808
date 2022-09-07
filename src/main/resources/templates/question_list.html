@@ -6,9 +6,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="question : ${questionList}">
-        <td th:text="${question.subject}"></td>
-        <td th:text="${question.createDate}"></td>
+    <tr th:each="question, loop : ${questionList}">
+        <td>
+            [[${loop.count}]] / [[${loop.size}]]
+        </td>
+        <td>
+            [[${question.subject}]]
+        </td>
+        <td>
+            [[${question.createDate}]]
+        </td>
     </tr>
     </tbody>
 </table>
