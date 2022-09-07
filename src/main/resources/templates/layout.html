@@ -13,13 +13,8 @@
   <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
   <title>Hello, sbb!</title>
 </head>
-<body>
+<body style="min-height:100vh;" class="d-flex flex-column">
 
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<th:block layout:fragment="content"></th:block>
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-
-</body>
 
 <header>
   <div class="container py-3 d-flex">
@@ -35,14 +30,17 @@
 
 
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<th:block layout:fragment="content"></th:block>
+<main class="flex-grow-1">
+  <th:block layout:fragment="content"></th:block>
+</main>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 
 
-<footer>
+<footer class="bg-dark text-light">
   <div class="container py-3 d-flex justify-content-center">
     Copyright all rights reserved
   </div>
 </footer>
 
+</body>
 </html>
