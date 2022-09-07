@@ -1,5 +1,7 @@
 package com.ll.exam.sbb.user.controller;
 
+import com.ll.exam.sbb.SignupEmailDuplicatedException;
+import com.ll.exam.sbb.SignupUsernameDuplicatedException;
 import com.ll.exam.sbb.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -39,13 +41,11 @@ public class UserController {
         try {
             userService.create(userCreateForm.getUsername(),
                     userCreateForm.getEmail(), userCreateForm.getPassword1());
-        } catch (DataIntegrityViolationException e) {
-            e.printStackTrace();
-            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+        } catch (SignupEmailDuplicatedException e) {
+            bindingResult.reject("signupEmailDuplicated", e.getMessage());
             return "signup_form";
-        } catch (Exception e) {
-            e.printStackTrace();
-            bindingResult.reject("signupFailed", e.getMessage());
+        } catch (SignupUsernameDuplicatedException e) {
+            bindingResult.reject("signupUsernameDuplicated", e.getMessage());
             return "signup_form";
         }
 
