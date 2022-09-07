@@ -85,11 +85,35 @@ public class QuestionController {
             return "question_form";
         }
         Question question = this.questionService.getQuestion(id);
+
+        if (question == null) {
+            throw new DataNotFoundException("%d번 질문은 존재하지 않습니다.");
+        }
+
+
         if (!question.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.questionService.modify(question, questionForm.getSubject(), questionForm.getContent());
         return String.format("redirect:/question/detail/%s", id);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
+        Question question = questionService.getQuestion(id);
+
+        if (question == null) {
+            throw new DataNotFoundException("%d번 질문은 존재하지 않습니다.");
+        }
+
+        if (!question.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+
+        questionService.delete(question);
+
+        return "redirect:/";
     }
 
 
