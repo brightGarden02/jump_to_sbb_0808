@@ -1,5 +1,6 @@
 package com.ll.exam.sbb.answer.service;
 
+import com.ll.exam.sbb.DataNotFoundException;
 import com.ll.exam.sbb.answer.entity.Answer;
 import com.ll.exam.sbb.answer.repository.AnswerRepository;
 import com.ll.exam.sbb.question.entity.Question;
@@ -23,5 +24,10 @@ public class AnswerService {
         question.addAnswer(answer);
 
         answerRepository.save(answer);
+    }
+
+    public Answer getAnswer(Long id) {
+        return answerRepository.findById(id).orElseThrow(() -> new DataNotFoundException("answer not found"));
+
     }
 }
