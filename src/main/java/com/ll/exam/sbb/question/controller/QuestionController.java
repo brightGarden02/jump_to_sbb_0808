@@ -61,7 +61,7 @@ public class QuestionController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String questionModify(QuestionForm questionForm, @PathVariable("id") Integer id, Principal principal) {
+    public String questionModify(QuestionForm questionForm, @PathVariable("id") Long id, Principal principal) {
         Question question = this.questionService.getQuestion(id);
 
         if(!question.getAuthor().getUsername().equals(principal.getName())) {
@@ -76,7 +76,7 @@ public class QuestionController {
 
     @PostMapping("/modify/{id}")
     public String questionModify(@Valid QuestionForm questionForm, BindingResult bindingResult,
-                                 Principal principal, @PathVariable("id") Integer id) {
+                                 Principal principal, @PathVariable("id") Long id) {
         if (bindingResult.hasErrors()) {
             return "question_form";
         }
@@ -92,7 +92,7 @@ public class QuestionController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{id}")
-    public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
+    public String questionDelete(Principal principal, @PathVariable("id") Long id) {
         Question question = questionService.getQuestion(id);
 
 
