@@ -4,6 +4,7 @@ import com.ll.exam.sbb.answer.entity.Answer;
 import com.ll.exam.sbb.question.entity.Question;
 import com.ll.exam.sbb.answer.repository.AnswerRepository;
 import com.ll.exam.sbb.question.repository.QuestionRepository;
+import com.ll.exam.sbb.user.SiteUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +55,13 @@ class AnswerRepositoryTests {
 
         Answer a1 = new Answer();
         a1.setContent("sbb는 질문답변 게시판입니다.");
+        a1.setAuthor(new SiteUser(1L));
         a1.setCreateDate(LocalDateTime.now());
         q.addAnswer(a1);
 
         Answer a2 = new Answer();
         a2.setContent("sbb는 질문답변 게시판입니다.");
+        a1.setAuthor(new SiteUser(2L));
         a2.setCreateDate(LocalDateTime.now());
 
         questionRepository.save(q);
@@ -69,15 +72,17 @@ class AnswerRepositoryTests {
     @Transactional
     @Rollback(false)
     void 저장() {
-        Question q = questionRepository.findById(2).get();
+        Question q = questionRepository.findById(2L).get();
 
         Answer a1 = new Answer();
         a1.setContent("네 자동으로 생성됩니다.");
+        a1.setAuthor(new SiteUser(2L));
         a1.setCreateDate(LocalDateTime.now());
         q.addAnswer(a1);
 
         Answer a2 = new Answer();
         a2.setContent("네네~ 맏아요!");
+        a1.setAuthor(new SiteUser(2L));
         a2.setCreateDate(LocalDateTime.now());
         q.addAnswer(a2);
 
